@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_delivery/controllers/recommended_product_controller.dart';
+import 'package:flutter_food_delivery/routes/route_helper.dart';
+import 'package:flutter_food_delivery/utils/app_constants.dart';
 import 'package:flutter_food_delivery/utils/colors.dart';
 import 'package:flutter_food_delivery/utils/dimensions.dart';
 import 'package:flutter_food_delivery/widget/app_icon.dart';
 import 'package:flutter_food_delivery/widget/big_text.dart';
 import 'package:flutter_food_delivery/widget/expandable_text_widget.dart';
+import 'package:get/get.dart';
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendedFoodDetail({Key? key, required this.pageId,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 60,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                  onTap:(){
+                    Get.toNamed(RouteHelper.getInitial());
+      },
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.shopping_cart_outlined),
               ],
             ),
@@ -26,7 +37,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               preferredSize: Size.fromHeight(20),
               child: Container(
 
-                child: Center(child: BigText(text: "Chinese Side",size: Dimensions.font26,)),
+                child: Center(child: BigText(text: product.name!,size: Dimensions.font26,)),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top: 5,bottom: 10),
                 decoration: BoxDecoration(
@@ -42,7 +53,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset("assets/image/food0.png",width:double.maxFinite ,
+              background: Image.network(AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img!,width:double.maxFinite ,
               fit: BoxFit.cover,),
 
             ),
@@ -53,7 +64,7 @@ class RecommendedFoodDetail extends StatelessWidget {
 
               children: [
                 Container(
-                  child: ExpandableTextWidget(text: "Phở Dù giá rẻ nhưng ngon số 1. Danh sách các món ăn Việt Nam sẽ không được hoàn thiện mà không có phở. Bạn gần như có thể đi dạo khắp các thành phố lớn ở Việt Nam và bắt gặp cảnh những đám đông đang xì xụp vây quanh một hàng phở nóng sốt, thậm chí ngồi ngay trên vỉa hè. Món ăn ngon lành này gồm các nguyên liệu rất đơn giản như: nước dùng, mì gạo tươi, rắc các loại thảo mộc và thịt gà hoặc thịt bò."),
+                  child: ExpandableTextWidget(text: product.description!,),
                    margin: EdgeInsets.only(left: Dimensions.width20 , right: Dimensions.width20),
                     ),
               ],
@@ -74,7 +85,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppIcon(iconSize:Dimensions.iconSize24,iconColor: Colors.white ,backgroundColor: AppColors.mainColor,icon: Icons.remove,),
-                BigText(text: "12\$"+ " X " +" 0 ",color: AppColors.mainColor,size: Dimensions.font26,),
+                BigText(text: "\$ ${product.price!} X 0 ",color: AppColors.mainColor,size: Dimensions.font26,),
                 AppIcon(icon: Icons.add,iconSize: Dimensions.iconSize24,iconColor: Colors.white ,backgroundColor: AppColors.mainColor,)
               ],
             ),
