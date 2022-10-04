@@ -15,6 +15,8 @@ class CartController extends GetxController {
 
   Map<int , CartModel> get items=>_items;
 
+  List<CartModel> storageItems=[];
+
   void addItem(ProductModel product, int quantity) {
     var totalQuantity=0;
     if (_items.containsKey(product.id)) {
@@ -30,6 +32,7 @@ class CartController extends GetxController {
           quantity: value.quantity!+quantity,
           isExit: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       });
       if(totalQuantity<=0){
@@ -50,6 +53,7 @@ class CartController extends GetxController {
           quantity: quantity,
           isExit: true,
           time: DateTime.now().toString(),
+          product: product,
         );
       }
       );
@@ -58,7 +62,8 @@ class CartController extends GetxController {
         Get.snackbar("Product Count", "You should ar least add an item in the cart !",backgroundColor: AppColors.mainColor,colorText: Colors.white);
         }
     }
-
+    cartRepo.addToCartList(getItems);
+    update();
 
   }
 
@@ -94,4 +99,42 @@ class CartController extends GetxController {
       return e.value;
     }).toList();
   }
+
+  int get totalAmount {
+    var total = 0;
+    _items.forEach((key, value) {
+      total += value.quantity!*value.price!;
+    });
+    return total ;
+  }
+
+  List<CartModel> getCartData(){
+    setCart = cartRepo.getCartList();
+    return storageItems;
+  }
+
+  set setCart(List<CartModel> items){
+    storageItems = items;
+    print("lenght cart items"+storageItems.length.toString());
+    for(int i=0;i<storageItems.length;i++){
+      _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
+
+    }
+  }
+  void addToHistory(){
+    cartRepo.addToCartHistoryList();
+    clear();
+
+  }
+
+  void clear(){
+    _items={};
+      update();
+  }
+
+  List<CartModel> getCartHistoryList(){
+    return cartRepo.getCartHistoryList();
+  }
+
+
 }

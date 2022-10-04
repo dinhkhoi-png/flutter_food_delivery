@@ -28,6 +28,7 @@ class PopularProductController extends GetxController {
   int get quantity => _quantity;
   int _inCartItems = 0;
 
+
   int get inCarItems => _inCartItems + _quantity;
 
   Future<void> getPopularProductList() async {
@@ -108,4 +109,6 @@ class PopularProductController extends GetxController {
   List<CartModel> get getItems{
     return _cart.getItems;
   }
+
+
 }
