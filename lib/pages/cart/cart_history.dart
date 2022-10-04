@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery/controllers/cart_controller.dart';
+import 'package:flutter_food_delivery/routes/route_helper.dart';
 import 'package:flutter_food_delivery/utils/app_constants.dart';
 import 'package:flutter_food_delivery/utils/colors.dart';
 import 'package:flutter_food_delivery/utils/dimensions.dart';
@@ -133,6 +134,7 @@ class CartHistory extends StatelessWidget {
                                             }
                                             Get.find<CartController>().setItems = moreOrder;
                                             Get.find<CartController>().addToCartList();
+                                            Get.toNamed(RouteHelper.getCartPage());
                                           },
                                           child: Container(
                                             padding: EdgeInsets.symmetric(horizontal: Dimensions.width10,
