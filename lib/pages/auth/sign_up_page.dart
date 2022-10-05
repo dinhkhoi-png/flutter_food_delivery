@@ -1,6 +1,7 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_food_delivery/base/custom_loader.dart';
 import 'package:flutter_food_delivery/controllers/auth_controller.dart';
 
 import 'package:flutter_food_delivery/utils/colors.dart';
@@ -74,8 +75,8 @@ class SignUpPage extends StatelessWidget {
               SizedBox(height: Dimensions.screenHeight*0.05,),
               Container(
                 height: Dimensions.screenHeight*0.25,
-                child: Center(
-                  child: const CircleAvatar(
+                child: const Center(
+                  child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 80,
                     backgroundImage: AssetImage(
@@ -89,7 +90,7 @@ class SignUpPage extends StatelessWidget {
                   hintText: "Email", icon: Icons.email),
               SizedBox(height: Dimensions.height20,),
               AppTextField(textController: passwordController,
-                  hintText: "Password", icon: Icons.password_sharp),
+                  hintText: "Password", icon: Icons.password_sharp,isObscure: true,),
               SizedBox(height: Dimensions.height20,),
               AppTextField(textController: nameController,
                   hintText: "Name", icon: Icons.person),
@@ -147,7 +148,7 @@ class SignUpPage extends StatelessWidget {
               )
             ],
           ),
-        ):CircularProgressIndicator();
+        ):CustomLoader();
       },),
     );
 
