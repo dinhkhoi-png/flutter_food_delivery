@@ -9,7 +9,7 @@ import 'package:flutter_food_delivery/utils/dimensions.dart';
 
 
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 
 import '../../base/show_custom_snackbar.dart';
 import '../../models/signup_body_model.dart';
@@ -32,8 +32,8 @@ class SignUpPage extends StatelessWidget {
     void _registration(AuthController authController){
       //var authController = Get.find<AuthController>();
       String name = nameController.text.trim();
-      String email = emailController.text.trim();
       String phone = phoneController.text.trim();
+      String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
       if(name.isEmpty){
@@ -49,7 +49,7 @@ class SignUpPage extends StatelessWidget {
       }else if (password.length<6){
         showCustomSnackBar("Password can not be less than six chareters", title: "Password");
       }else{
-        //showCustomSnackBar("All went well", title: "Perfect");
+        showCustomSnackBar("All went well", title: "Perfect");
         SignUpBody signUpBody = SignUpBody(
             name: name,
             phone: phone,
@@ -69,7 +69,7 @@ class SignUpPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: GetBuilder<AuthController>(builder: (_authController){
         return !_authController.isLoading?SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               SizedBox(height: Dimensions.screenHeight*0.05,),
@@ -90,7 +90,7 @@ class SignUpPage extends StatelessWidget {
                   hintText: "Email", icon: Icons.email),
               SizedBox(height: Dimensions.height20,),
               AppTextField(textController: passwordController,
-                  hintText: "Password", icon: Icons.password_sharp,isObscure: true,),
+                hintText: "Password", icon: Icons.password_sharp,isObscure: true,),
               SizedBox(height: Dimensions.height20,),
               AppTextField(textController: nameController,
                   hintText: "Name", icon: Icons.person),
@@ -148,9 +148,10 @@ class SignUpPage extends StatelessWidget {
               )
             ],
           ),
-        ):CustomLoader();
-      },),
-    );
+        ):const CustomLoader();
+      })
+      );
+
 
 
   }

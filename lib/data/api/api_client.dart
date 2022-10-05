@@ -9,7 +9,7 @@ class ApiClient extends GetConnect implements GetxService{
   ApiClient({required this.appBaseUrl}){
     baseUrl = appBaseUrl;
     timeout = Duration(seconds: 30);
-    token=AppConstants.TOKEN;
+    token= AppConstants.TOKEN;
     _mainHeaders={
       'Content-type':'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
@@ -29,7 +29,7 @@ class ApiClient extends GetConnect implements GetxService{
       return Response(statusCode: 1 ,statusText: e.toString());
     }
   }
-  Future<Response> postData(String uri,dynamic body)async{
+  Future<Response> postData(String uri, dynamic body)async{
     print(body.toString());
     try{
       Response response = await post(uri, body,headers: _mainHeaders);

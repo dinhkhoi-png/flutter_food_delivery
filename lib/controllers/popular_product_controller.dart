@@ -20,15 +20,12 @@ class PopularProductController extends GetxController {
   late CartController _cart;
 
   bool _isLoaded = false;
-
   bool get isLoaded => _isLoaded;
 
   int _quantity = 0;
-
   int get quantity => _quantity;
+
   int _inCartItems = 0;
-
-
   int get inCarItems => _inCartItems + _quantity;
 
   Future<void> getPopularProductList() async {

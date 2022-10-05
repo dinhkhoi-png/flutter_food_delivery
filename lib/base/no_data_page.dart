@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class NoDataPage extends StatelessWidget {
   final String text;
   final String imgPath;

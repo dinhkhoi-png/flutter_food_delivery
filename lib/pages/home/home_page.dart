@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery/pages/account/account_page.dart';
+import 'package:flutter_food_delivery/pages/auth/sign_in_page.dart';
 import 'package:flutter_food_delivery/pages/auth/sign_up_page.dart';
 import 'package:flutter_food_delivery/pages/cart/cart_history.dart';
 import 'package:flutter_food_delivery/pages/home/main_food_page.dart';
@@ -79,10 +80,10 @@ Widget build(BuildContext context) {
 
   List<Widget> _buildScreens() {
     return [
-      MainFoodPage(),
-      SignUpPage(),
-      CartHistory(),
-      AccountPage(),
+      const MainFoodPage(),
+      Container(child: Text("History Page")),
+      const CartHistory(),
+      const AccountPage(),
     ];
   }
 
