@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_food_delivery/controllers/cart_controller.dart';
 import 'package:flutter_food_delivery/controllers/popular_product_controller.dart';
 import 'package:flutter_food_delivery/controllers/recommended_product_controller.dart';
+import 'package:flutter_food_delivery/data/api/api_client.dart';
 import 'package:flutter_food_delivery/pages/auth/sign_in_page.dart';
 import 'package:flutter_food_delivery/pages/auth/sign_up_page.dart';
 import 'package:flutter_food_delivery/pages/cart/cart_page.dart';
@@ -26,14 +27,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     Get.find<CartController>().getCartData();
-      Get.find<PopularProductController>().getPopularProductList();
-      Get.find<RecommendedProductController>().getRecommendedProductList();
+    Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return GetBuilder<PopularProductController>(
       builder: (_){
         return GetBuilder<RecommendedProductController>(builder: (_){
-          return GetMaterialApp(
+          return GetMaterialApp (
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             //home: SignInPage(),
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
           );
         });
       },
+      
     );
   }
 }
-

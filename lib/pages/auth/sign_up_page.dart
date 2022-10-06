@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery/base/custom_loader.dart';
 import 'package:flutter_food_delivery/controllers/auth_controller.dart';
+import 'package:flutter_food_delivery/routes/route_helper.dart';
 
 import 'package:flutter_food_delivery/utils/colors.dart';
 import 'package:flutter_food_delivery/utils/dimensions.dart';
@@ -58,6 +59,7 @@ class SignUpPage extends StatelessWidget {
         authController.registration(signUpBody).then((status){
           if(status.isSuccess){
             print("Success registration");
+            Get.offNamed(RouteHelper.getSignInPage());
           }else{
             showCustomSnackBar(status.message);
           }
