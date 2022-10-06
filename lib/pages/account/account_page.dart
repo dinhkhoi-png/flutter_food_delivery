@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_delivery/controllers/auth_controller.dart';
+import 'package:flutter_food_delivery/controllers/cart_controller.dart';
+import 'package:flutter_food_delivery/routes/route_helper.dart';
 import 'package:flutter_food_delivery/utils/colors.dart';
 import 'package:flutter_food_delivery/utils/dimensions.dart';import '../../widget/account_widget.dart';
 import '../../widget/app_icon.dart';
 
-
+import 'package:get/get.dart';
 import '../../widget/big_text.dart';
 
 class AccountPage extends StatelessWidget {
@@ -78,16 +81,32 @@ class AccountPage extends StatelessWidget {
                       iconColor: Colors.white,
                       iconSize:Dimensions.height50/2,
                       size: Dimensions.height50,),
-                      bigText: BigText(text:"Khoi",size: Dimensions.font20,),
+                      bigText: BigText(text:"Message",size: Dimensions.font20,),
                     ),
                     SizedBox(height: Dimensions.height20,),
-                    AccountWidget(appIcon: AppIcon(icon: Icons.message,
-                      backgroundColor: Colors.redAccent,
-                      iconColor: Colors.white,
-                      iconSize:Dimensions.height50/2,
-                      size: Dimensions.height50,),
-                      bigText: BigText(text:"Message",size: Dimensions.font20,),
-                    )
+                    GestureDetector(
+                      onTap: (){
+                        if(Get.find<AuthController>().userLoggedIn()){
+                          Get.find<AuthController>().clearShareData();
+                          Get.find<CartController>().clear();
+                          Get.find<CartController>().clearCartHistory();
+                          Get.offNamed(RouteHelper.getSignInPage());
+                        }else{
+                          print("You logout  !");
+                        }
+
+
+                      },
+                      child: AccountWidget(
+                        appIcon: AppIcon(icon: Icons.logout,
+                          backgroundColor: Colors.redAccent,
+                          iconColor: Colors.white,
+                          iconSize:Dimensions.height50/2,
+                          size: Dimensions.height50,),
+                        bigText: BigText(text:"Logout",size: Dimensions.font20,),
+                      ),
+                    ),
+                    SizedBox(height: Dimensions.height20,)
                   ],
                 ),
               ),

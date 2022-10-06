@@ -12,6 +12,7 @@ import 'package:flutter_food_delivery/widget/big_text.dart';
 import 'package:flutter_food_delivery/widget/icon_and_text_widget.dart';
 import 'package:flutter_food_delivery/widget/small_text.dart';
 import 'package:get/get.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../controllers/recommended_product_controller.dart';
 
@@ -140,17 +141,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             Container(
                               width: Dimensions.listViewImg,
                               height: Dimensions.listViewImg,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius20),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          AppConstants.BASE_URL +
-                                              AppConstants.UPLOAD_URL +
-                                              recommendedProduct
-                                                  .recommendedProductList[index]
-                                                  .img!))),
+                              // decoration: BoxDecoration(
+                              //     borderRadius: BorderRadius.circular(
+                              //         Dimensions.radius20),
+                              //     image: DecorationImage(
+                              //         fit: BoxFit.cover,
+                              //         image: NetworkImage(
+                              //             AppConstants.BASE_URL +
+                              //                 AppConstants.UPLOAD_URL +
+                              //                 recommendedProduct
+                              //                     .recommendedProductList[index]
+                              //                     .img!)
+                              //     )
+                              // ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                                child: CachedNetworkImage(
+                                  imageUrl: AppConstants.BASE_URL + AppConstants.UPLOAD_URL +
+                                      recommendedProduct.recommendedProductList[index].img!,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                             Expanded(
                               child: Container(
@@ -257,14 +268,26 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               height: Dimensions.pageViewContainer,
               margin: EdgeInsets.only(
                   left: Dimensions.width10, right: Dimensions.width10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius30),
-                  color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(AppConstants.BASE_URL +
-                          AppConstants.UPLOAD_URL +
-                          popularProductList.img!))),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(Dimensions.radius30),
+                child: CachedNetworkImage(
+                  imageUrl: AppConstants.BASE_URL+AppConstants.UPLOAD_URL+popularProductList.img!,
+                  height: Dimensions.pageViewContainer,
+                  width: Dimensions.screenWidth,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              // decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(Dimensions.radius30),
+              //     color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
+              //     image: DecorationImage(
+              //         fit: BoxFit.cover,
+              //         image: NetworkImage(AppConstants.BASE_URL +
+              //             AppConstants.UPLOAD_URL +
+              //             popularProductList.img!)
+              //     )
+              // ),
+
             ),
           ),
           Align(

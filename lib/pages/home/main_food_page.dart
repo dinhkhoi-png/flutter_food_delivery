@@ -18,7 +18,7 @@ class MainFoodPage extends StatefulWidget {
 }
 
 class _MainFoodPageState extends State<MainFoodPage> {
-  Future<void>_loadResource() async {
+  Future<void> _loadResource() async {
     await Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList();
   }
@@ -26,60 +26,61 @@ class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
     //print("current height" + MediaQuery.of(context).size.height.toString());
-    return RefreshIndicator(child: Column(
-      children: [
-        Container(
-
-          child: Container(
-            margin: EdgeInsets.only(
-                top: Dimensions.height45, bottom: Dimensions.height15),
-            padding: EdgeInsets.only(
-                left: Dimensions.width20, right: Dimensions.width20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+    return RefreshIndicator(
+        child: Column(
+          children: [
+            Container(
+              child: Container(
+                margin: EdgeInsets.only(
+                    top: Dimensions.height45, bottom: Dimensions.height15),
+                padding: EdgeInsets.only(
+                    left: Dimensions.width20, right: Dimensions.width20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BigText(
-                      text: "HO CHI MINH",
-                      color: AppColors.mainColor,
-                    ),
-                    Row(
+                    Column(
                       children: [
-                        SmallText(
-                          text: "quan 1",
-                          color: AppColors.mainBlackColor,
+                        BigText(
+                          text: "HO CHI MINH",
+                          color: AppColors.mainColor,
                         ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: AppColors.mainBlackColor,
-                        ),
+                        Row(
+                          children: [
+                            SmallText(
+                              text: "quan 1",
+                              color: AppColors.mainBlackColor,
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down,
+                              color: AppColors.mainBlackColor,
+                            ),
+                          ],
+                        )
                       ],
+                    ),
+                    Container(
+                      height: Dimensions.height45,
+                      width: Dimensions.height45,
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.height15),
+                        color: AppColors.mainColor,
+                      ),
                     )
                   ],
                 ),
-                Container(
-                  height: Dimensions.height45,
-                  width: Dimensions.height45,
-                  child: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.height15),
-                    color: AppColors.mainColor,
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
-        ),
-        Expanded(
-            child: SingleChildScrollView(
+            Expanded(
+                child: SingleChildScrollView(
               child: FoodPageBody(),
             )),
-      ],
-    ), onRefresh: _loadResource);
-
+          ],
+        ),
+        onRefresh: _loadResource);
   }
 }

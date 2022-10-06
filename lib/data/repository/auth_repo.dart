@@ -17,9 +17,10 @@ class AuthRepo{
     return await apiClient.postData(AppConstants.REGISTRATION_URI, signUpBody.toJson());
   }
 
-  Future<String> getUserToken() async {
-    return await sharedPreferences.getString(AppConstants.TOKEN)??"None";
+  bool userLoggedIn() {
+    return sharedPreferences.containsKey(AppConstants.TOKEN);
   }
+
 
   Future<Response> login(String phone,String password)async{
     return await apiClient.postData(AppConstants.LOGIN_URI, {"phone":phone,"password":password});
@@ -40,5 +41,14 @@ class AuthRepo{
     }catch(e){
       throw(e);
     }
+  }
+
+  bool clearShareData(){
+    sharedPreferences.remove(AppConstants.TOKEN);
+    sharedPreferences.remove(AppConstants.PASSWORD);
+    sharedPreferences.remove(AppConstants.PHONE);
+    apiClient.token='';
+    apiClient.updateHeader('');
+    return true;
   }
 }
