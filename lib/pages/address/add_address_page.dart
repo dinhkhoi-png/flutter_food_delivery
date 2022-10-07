@@ -5,6 +5,7 @@ import 'package:flutter_food_delivery/controllers/user_controller.dart';
 import 'package:flutter_food_delivery/utils/dimensions.dart';
 import 'package:flutter_food_delivery/widget/app_text_field.dart';
 import 'package:flutter_food_delivery/widget/big_text.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:get/get.dart';
 
@@ -29,7 +30,19 @@ class _AddAddressPageState extends State<AddAddressPage> {
   CameraPosition _cameraPosition = const CameraPosition(target: LatLng(10.823842,106.634098 ),zoom: 20);
 
   late LatLng _initialPosition=const LatLng(10.823842,106.634098);//45.51563 , -122.677433 //10.823842,106.634098
+  late LatLng _initial;
+  // lấy location mặc định tại vị trí hiện tại
+  // * kiểm tra trong mainferst đã cấp quyền chưa?
+  void _getUserLocation() async {
+    var position = await GeolocatorPlatform.instance.getCurrentPosition(
+        locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.bestForNavigation));
+    setState(() {
+      _initial = LatLng(position.latitude, position.longitude);
+      print('address>>>>>>>>>>>>>>>> : $_initial');
 
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -141,6 +154,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
                     );
                   }),),
                 ),
+                IconButton(onPressed: (){
+                  _getUserLocation();
+                }, icon:Icon(Icons.location_on) ),
                 SizedBox(height: Dimensions.height20,),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
@@ -164,7 +180,6 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 ),
                 SizedBox(height: Dimensions.height10,),
                 AppTextField(textController: _contactPersonNumber, hintText: "Your address", icon: Icons.phone),
-
 
               ],
             ),

@@ -16,6 +16,7 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
     if(_userLoggedIn){
       Get.find<UserController>().getUserInfo();
@@ -36,6 +37,7 @@ class AccountPage extends StatelessWidget {
           width: double.maxFinite,
           margin: EdgeInsets.only(top: Dimensions.height20,),
           child: Column(
+
             children: [
               AppIcon(icon: Icons.person,backgroundColor: AppColors.mainColor,
                 iconColor: Colors.white,
@@ -125,13 +127,14 @@ class AccountPage extends StatelessWidget {
           ),
         ):CustomLoader())
             :Container(
+              color: Colors.white,
             child: Center(
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                        width: double.maxFinite,
-                        height: Dimensions.height20*8,
+                        height: Dimensions.height20*12,
                         margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(Dimensions.radius20),
@@ -144,6 +147,7 @@ class AccountPage extends StatelessWidget {
                           )
                         ),
             ),
+                    SizedBox(height: Dimensions.height20,),
                     GestureDetector(
                       onTap: (){
                         Get.toNamed(RouteHelper.getSignInPage());

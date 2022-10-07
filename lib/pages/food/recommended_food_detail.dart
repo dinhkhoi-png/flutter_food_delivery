@@ -206,9 +206,9 @@ class RecommendedFoodDetail extends StatelessWidget {
                               BorderRadius.circular(Dimensions.radius20),
                           color: Colors.white),
                       child: Icon(
-                        Icons.favorite,
-                        color: AppColors.mainColor,
-                      ),
+                      Icons.favorite,
+                      color: AppColors.iconColor2,
+                        ),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -239,4 +239,16 @@ class RecommendedFoodDetail extends StatelessWidget {
       ),
     );
   }
+
+  MaterialStateProperty<Color> getColor(Color color , Color colorPressed) {
+    final getColor = (Set<MaterialState> states){
+      if(states.contains(MaterialState.pressed)){
+        return colorPressed;
+      }else{
+        return color;
+      }
+    };
+    return MaterialStateProperty.resolveWith(getColor);
+  }
+
 }

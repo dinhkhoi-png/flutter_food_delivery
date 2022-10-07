@@ -227,7 +227,7 @@ packages:
     source: hosted
     version: "2.1.12"
   google_maps_flutter_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: google_maps_flutter_platform_interface
       url: "https://pub.dartlang.org"
@@ -359,6 +359,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
+  permission:
+    dependency: "direct main"
+    description:
+      name: permission
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.7"
   persistent_bottom_nav_bar:
     dependency: "direct main"
     description:

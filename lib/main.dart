@@ -4,6 +4,7 @@ import 'package:flutter_food_delivery/controllers/cart_controller.dart';
 import 'package:flutter_food_delivery/controllers/popular_product_controller.dart';
 import 'package:flutter_food_delivery/controllers/recommended_product_controller.dart';
 import 'package:flutter_food_delivery/data/api/api_client.dart';
+import 'package:flutter_food_delivery/pages/address/add_address_page.dart';
 import 'package:flutter_food_delivery/pages/auth/sign_in_page.dart';
 import 'package:flutter_food_delivery/pages/auth/sign_up_page.dart';
 import 'package:flutter_food_delivery/pages/cart/cart_page.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp (
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            //home: SignInPage(),
+            //home: AddAddressPage(),
             initialRoute: RouteHelper.getSplashPage(),
             getPages: RouteHelper.routes,
           );

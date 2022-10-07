@@ -207,7 +207,7 @@ class PopularFoodDetail extends StatelessWidget {
                       left: Dimensions.width20,
                       right: Dimensions.width20),
                   child: BigText(
-                    text: "\$ ${product.price!} | Add to cart",
+                    text: " ${product.price!}\$ | Add to cart",
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
